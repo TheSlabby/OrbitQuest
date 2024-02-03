@@ -1,4 +1,5 @@
 import requests
+import os
 
 def get_apod(api_key=None):
     base_url = "https://api.nasa.gov/planetary/apod"
@@ -20,7 +21,7 @@ def get_apod(api_key=None):
 
 
 # Replace 'YOUR_API_KEY' with your actual NASA API key
-nasa_api_key = 'YOUR_API_Key'
+nasa_api_key = os.environ.get("APOD_KEY")
 apod_data = get_apod(api_key=nasa_api_key)
 
 if apod_data:
