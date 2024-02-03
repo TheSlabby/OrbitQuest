@@ -2,11 +2,19 @@ import * as THREE from 'https://cdn.skypack.dev/three@0.133.0/build/three.module
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/loaders/GLTFLoader.js';
 
 
+//variables
 let camera, scene, renderer, clock;
 let earth, iss;
+//iss velocity calculation
+let lastISSPosition = new THREE.Vector2();
+let ISSVelocity = new THREE.Vector2();
+let ISSGoalPosition = new THREE.Vector3();
+
+
 
 //constants
 const earthRotateSpeed = 0.0005;
+const ISSDegreesPerSecond = 1.63888888889;
 
 init();
 animate();
@@ -43,7 +51,6 @@ function init() {
 
     const light = new THREE.AmbientLight(0xF0F0F0, 0.1);
     scene.add(light);
-
 
 
     //load iss model
@@ -99,6 +106,9 @@ function init() {
 
     window.addEventListener( 'resize', onWindowResize );
 
+    //update ISS position periodically
+    setInterval(updateISSPosition, 10000);
+
 }
 
 function onWindowResize() {
@@ -115,26 +125,50 @@ function animate() {
     requestAnimationFrame( animate );
 
     if (earth && iss) {
-        earth.scale.set(0.2,0.2,0.2);
+        earth.scale.set(0.25,0.25,0.25);
+        iss.scale.set(.3,.3,.3)
 
-        earth.rotation.x += earthRotateSpeed;
+        //earth.rotation.x += earthRotateSpeed;
     
 
 
-        iss.position.set(0,50,0);
+        //iss.position.set(0,50,0);
         iss.scale.set(0.2,0.2,0.2)
         iss.rotation.y = 0.1 * Math.sin(clock.getElapsedTime() * 1);
         iss.rotation.x = .05 * Math.sin(clock.getElapsedTime() * .5);
+        iss.position.copy(iss.position.lerp(ISSGoalPosition, .005));
 
         //update cam
+        let directionToEarth = new THREE.Vector3().subVectors(iss.position, earth.position).normalize().multiplyScalar(30);
         camera.position.copy(iss.position);
-        camera.position.y += 100;
-        camera.lookAt(iss.position);
-        camera.updateMatrix();
+        camera.position.add(directionToEarth);
+        camera.lookAt(earth.position)
 
     }
 
 
     renderer.render( scene, camera );
 
+}
+
+async function updateISSPosition() {
+    const response = await fetch('http://api.open-notify.org/iss-now.json');
+    const data = await response.json(); // Extract JSON from the HTTP response
+    let lat = data.iss_position.latitude;
+    let lon = data.iss_position.longitude;
+    console.log(lat);
+    console.log(lon);
+
+    let goal = new THREE.Vector3();
+    const toRad = Math.PI / 180;
+    const rho = 120;
+    goal.x = rho * Math.sin(lat * toRad) * Math.cos(lon * toRad); 
+    goal.z = rho * Math.sin(lat * toRad) * Math.sin(lon * toRad);
+    goal.y = rho * Math.cos(lat * toRad);
+
+    console.log(goal);
+
+
+
+    ISSGoalPosition = goal;
 }
