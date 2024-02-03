@@ -1,0 +1,49 @@
+import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+
+let camera, scene, renderer;
+let mesh;
+
+init();
+animate();
+
+function init() {
+
+    camera = new THREE.PerspectiveCamera( 90, window.innerWidth / window.innerHeight, 1, 1000 );
+    camera.position.z = 400;
+
+    scene = new THREE.Scene();
+
+    const geometry = new THREE.SphereGeometry( 200, 200, 200 );
+    const material = new THREE.MeshBasicMaterial( { color: "red" } );
+
+    mesh = new THREE.Mesh( geometry, material );
+    scene.add( mesh );
+
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    document.body.appendChild( renderer.domElement );
+
+    window.addEventListener( 'resize', onWindowResize );
+
+}
+
+function onWindowResize() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+function animate() {
+
+    requestAnimationFrame( animate );
+
+    mesh.rotation.x += 0.005;
+    mesh.rotation.y += 0.01;
+
+    renderer.render( scene, camera );
+
+}
