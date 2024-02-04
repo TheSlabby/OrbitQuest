@@ -28,6 +28,13 @@
     color: #f2f2f2a6;
   }
 
+  h1 {
+    text-align: center;
+    font-family: Calibri, sans-serif;
+    color: #f2f2f2a6;
+    font-size: 20;
+  }
+
   body {
     background-color: rgb(19, 19, 19);
   }

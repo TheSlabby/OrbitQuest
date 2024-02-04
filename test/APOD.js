@@ -1,13 +1,6 @@
-let imageURL, imageTitle, imageDescription
-const fetch = require('node-fetch'); // Make sure to install 'node-fetch' using npm install node-fetch
+const nasaApiKey = process.env.APOD_KEY;
+let apodTitle, apodDate, apodExplanation, apodHdUrl, apodUrl;
 
-function init {
-        const response = await fetch('https://api.nasa.gov/planetary/apod');
-        const data = await response.json(); // Extract JSON from the HTTP response
-        
-    
-    
-}
 async function getApod(apiKey) {
     const baseUrl = "https://api.nasa.gov/planetary/apod";
     
@@ -25,16 +18,23 @@ async function getApod(apiKey) {
     }
 }
 
-// Replace 'YOUR_API_KEY' with your actual NASA API key
-const nasaApiKey = process.env.APOD_KEY;
+
 getApod(nasaApiKey)
     .then(apodData => {
         if (apodData) {
-            console.log("Title:", apodData.title);
-            console.log("Date:", apodData.date);
-            console.log("Explanation:", apodData.explanation);
-            console.log("HD URL:", apodData.hdurl);
-            console.log("URL:", apodData.url);
+            // Assign values to variables
+            apodTitle = apodData.title;
+            apodDate = apodData.date;
+            apodExplanation = apodData.explanation;
+            apodHdUrl = apodData.hdurl;
+            apodUrl = apodData.url;
+
+            // Manipulate the HTML DOM to display the values
+            document.getElementById('title').innerText = `Title: ${apodTitle}`;
+            document.getElementById('date').innerText = `Date: ${apodDate}`;
+            document.getElementById('explanation').innerText = `Explanation: ${apodExplanation}`;
+            document.getElementById('hdUrl').innerText = `HD URL: ${apodHdUrl}`;
+            document.getElementById('url').innerText = `URL: ${apodUrl}`;
         } else {
             console.log("Failed to retrieve APOD data.");
         }
