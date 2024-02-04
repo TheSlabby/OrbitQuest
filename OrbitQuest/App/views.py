@@ -5,9 +5,6 @@ import utils, requests
 
 def get_country(request):
     KEY = utils.getGeoKey()
-
-
-
     try:
         iss_response = requests.get('http://api.open-notify.org/iss-now.json')
         iss_data = iss_response.json()
@@ -31,6 +28,25 @@ def get_country(request):
         print(str(e))
         # Handle any errors during the request
         return JsonResponse({'error': str(e)}, status=500)
+
+def get_apod(request):
+    KEY = utils.getNasaKey()
+    base_url = "https://api.nasa.gov/planetary/apod"
+
+    # If you have an API key, you can include it in the request
+    if KEY:
+        params = {'api_key': KEY}
+    else:
+        params = {}
+
+    response = requests.get(base_url, params=params)
+
+    if response.status_code == 200:
+        return JsonResponse(response.json(), safe=False)
+    else:
+        print(f"Error: {response.status_code}")
+        return None
+
 
 
 

@@ -16,7 +16,7 @@ let mouseOffset = new THREE.Vector2();
 //constants
 const earthRotateSpeed = 0.0005;
 const ISSDegreesPerSecond = 1.63888888889;
-const shouldGetCountry = false;
+const shouldGetCountry = true;
 
 init();
 animate();
@@ -52,7 +52,7 @@ function init() {
     scene.add( directionalLight );
 
 
-    const light = new THREE.AmbientLight(0xF0F0F0, 0.1);
+    const light = new THREE.AmbientLight(0xF0F0F0, 0.2);
     scene.add(light);
 
 
@@ -101,13 +101,15 @@ function init() {
         }
     );
 
+    const container = document.getElementById('three-container');
     renderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    renderer.setClearColor( 0x050505    , 0);
-    document.body.appendChild( renderer.domElement );
+    renderer.setSize( container.clientWidth, container.clientHeight);
+    renderer.setClearColor( 0x101010 , 0);
+    container.appendChild( renderer.domElement );
 
     window.addEventListener( 'resize', onWindowResize );
+    onWindowResize();
 
     //update ISS position periodically
     setInterval(updateISSPosition, 30000);
@@ -162,8 +164,8 @@ async function updateISSPosition() {
     let lat = data.iss_position.latitude;
     let lon = data.iss_position.longitude;
     //offset
-    lat = 0;
-    lon = 0;
+    lat -= 90;
+    lon = (lon * -1) + 180;
     console.log(lat);
     console.log(lon);
 
@@ -185,9 +187,13 @@ async function updateISSPosition() {
         .then(response => response.json())
         .then(data => {
             //print out country
+            document.getElementById('iss-current-country').textContent = data.address.country || 'Not over any country';
             console.log(data.address.country)
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => {
+            document.getElementById('iss-current-country').textContent = 'Currently in the middle of nowhere :(';
+            console.error('Error fetching data (we might be in the middle of no where):', error);
+        });
     }
 
 
