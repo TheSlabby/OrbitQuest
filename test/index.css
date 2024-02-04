@@ -39,6 +39,20 @@
     background-color: rgb(19, 19, 19);
   }
 
+  para {
+    text-align: left;
+    color: #f2f2f2a6;
+    font-size: 12px;
+    font-family: Calibri, sans-serif;
+  }
+
+  imgTitle {
+    color: #f2f2f2a6;
+    text-align: center;
+    font-size: 17px;
+    font-family: Calibri, sans-serif
+  }
+
   footer {
     width: 100%;
     left: 0;
