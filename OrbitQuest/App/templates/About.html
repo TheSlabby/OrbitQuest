@@ -1,6 +1,8 @@
-<head>
-    <link rel="stylesheet" type="text/css" href="index.css">
- </head>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
 <div class="topnav">
     <a href="#home">Home</a>
     <a href="#Tracker">ISS Tracker</a>
@@ -24,3 +26,5 @@
     <p>Created by Ubunthree</p>
     <P>&copy Copyright 2024</P>
   </ourFooter>
+
+  {% endblock %}
