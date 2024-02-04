@@ -29,6 +29,9 @@ def get_country(request):
         # Handle any errors during the request
         return JsonResponse({'error': str(e)}, status=500)
 
+def apod(request):
+    return render(request, 'apod.html')
+
 def get_apod(request):
     KEY = utils.getNasaKey()
     base_url = "https://api.nasa.gov/planetary/apod"
@@ -51,7 +54,7 @@ def get_apod(request):
 
 
 # Your view function
-def my_view(request):
+def tracker(request):
     # Define context if you need to pass data to the template
     context = {'message': 'Hello, Django!'}
     

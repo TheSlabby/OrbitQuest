@@ -16,7 +16,7 @@ let mouseOffset = new THREE.Vector2();
 //constants
 const earthRotateSpeed = 0.0005;
 const ISSDegreesPerSecond = 1.63888888889;
-const shouldGetCountry = true;
+const shouldGetCountry = false;
 
 init();
 animate();
