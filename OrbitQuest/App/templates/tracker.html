@@ -2,8 +2,13 @@
 {% load static %}
 
 		
-{% block content %}
+{% block head %}
+<style>
+	body { margin: 0; background-image: url("{% static 'textures/skybox.avif' %}"); }
+</style>
+{% endblock %}
 
+{% block content %}
 
 <script type="module" src="{% static 'js/main.js' %}"></script>
 <div id="three-container"></div>
@@ -27,7 +32,7 @@
 <ourFooter>
     <p>Created by Ubunthree</p>
     <P>&copy Copyright 2024</P>
-</ourFooter>
+  </ourFooter>
 
 
 {% endblock %}
