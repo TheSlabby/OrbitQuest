@@ -12,87 +12,63 @@
 {% block content %}
 
 <div class="container my-5">
-  <!-- MDB Card -->
-  <div class="card">
-    <!-- Card Header (optional) -->
-    <div class="card-header">
-      <h1 class="card-title text-center mb-0">About Our Team</h1>
-    </div>
-    
-    <!-- Card Body -->
-    <div class="card-body">
-      <p class="text-justify" style="text-indent: 25px;">
-        Meet "Ubunthree," a trio of engineering students hailing 
-        from the prestigious Auburn University. As juniors, these talented individuals 
-        have embarked on their second Hackathon journey, armed with a passion 
-        for problem-solving, great senses of humor, and a shared commitment to shaping the future through ingenuity.
-      </p>
-      <br>
-    </div>
-    
-    <div class="card">
-    <!-- Card Image -->
-    <img src="OrbitQuest/static/textures/Walker_McGilvary.jpg" class="card-img-top" alt="Walker Image"> <!-- Update src with your image path -->
-    
-    <!-- Card Header (optional) -->
-    <div class="card-header">
-      <h1 class="card-title text-center mb-0">Walker McGilvary</h1>
-    </div>
-    
-    <!-- Card Body -->
-    <div class="card-body">
-      <p class="text-justify" style="text-indent: 25px;">
-        Walker McGilvary is a Junior at Auburn University studying Computer Engineering.
-        In his free time he enjoys learning programming languages, working out, and playing
-        games with his friends, especially League of Legends.
-      </p>
-    </div>
-    
-  </div>
-  <!-- End of MDB Card -->
-  <div class="card">
-    <!-- Card Image -->
-    <img src="OrbitQuest/static/textures/Jonathan_Story.jpg">
+  <div class="row">
+      <!-- Card 1 -->
+      <div class="col-md-4">
+          <div class="card">
+              <!-- Card Image -->
+              <img src="{% static 'textures/Walker_McGilvary.jpg' %}" class="card-img-top img-fluid" alt="Walker Image">
+              <!-- Card Header -->
+              <div class="card-header">
+                  <h1 class="card-title text-center mb-0">Walker McGilvary</h1>
+              </div>
+              <!-- Card Body -->
+              <div class="card-body">
+                  <p class="text-justify" style="text-indent: 25px;">
+                      Walker McGilvary is a Junior at Auburn University studying Computer Engineering.
+                      In his free time he enjoys learning programming languages, working out, and playing
+                      games with his friends, especially League of Legends.
+                  </p>
+              </div>
+          </div>
+      </div>
 
-    <!-- Card Header (optional) -->
-    <div class="card-header">
-      <h1 class="card-title text-center mb-0">Jonathan Story</h1>
-    </div>
-    
-    <!-- Card Body -->
-    <div class="card-body">
-      <p class="text-justify" style="text-indent: 25px;">
-        Jonathan Story is a Junior Electrical Engineering student at Auburn University.
-        In his freetime, Jonathan enjoys prototyping hardware.
-      </p>
-    </div>
-    
-  </div>
-  <!-- End of MDB Card -->
-  <div class="card">
-    <!-- Card Image -->
-    <img src="OrbitQuest/static/textures/Marshall_Nelson.JPG">
+      <!-- Card 2 -->
+      <div class="col-md-4">
+          <div class="card">
+              <img src="{% static 'textures/Jonathan_Story.jpg' %}" class="card-img-top img-fluid" alt="Jonathan Story">
+              <div class="card-header">
+                  <h1 class="card-title text-center mb-0">Jonathan Story</h1>
+              </div>
+              <div class="card-body">
+                  <p class="text-justify" style="text-indent: 25px;">
+                      Jonathan Story is a Junior Electrical Engineering student at Auburn University.
+                      In his freetime, Jonathan enjoys prototyping hardware.
+                  </p>
+              </div>
+          </div>
+      </div>
 
-    <!-- Card Header (optional) -->
-    <div class="card-header">
-      <h1 class="card-title text-center mb-0">Marshall Nelson</h1>
-    </div>
-    
-    <!-- Card Body -->
-    <div class="card-body">
-      <p class="text-justify" style="text-indent: 25px;">
-        Marshall Nelson is a Junior at Auburn University. He is pursuing a degree
-        in Computer Science, alongside a minor in German, and an undergraduate certificate
-        in CyberDefense. In his freetime, Marshall enjoys learning about the latest 
-        computer hardware, participating in cybersecurity competitions, and playing
-        League with his friends. A fun fact about Marshall is that he spent Summmer 2023
-        studying abroad in Vienna Austria!
-      </p>
-    </div>
-    
+      <!-- Card 3 -->
+      <div class="col-md-4">
+          <div class="card">
+              <img src="{% static 'textures/Marshall_Nelson.JPG' %}" class="card-img-top img-fluid" alt="Marshall Nelson">
+              <div class="card-header">
+                  <h1 class="card-title text-center mb-0">Marshall Nelson</h1>
+              </div>
+              <div class="card-body">
+                  <p class="text-justify" style="text-indent: 25px;">
+                      Marshall Nelson is a Junior at Auburn University. He is pursuing a degree
+                      in Computer Science, alongside a minor in German, and an undergraduate certificate
+                      in CyberDefense. In his freetime, Marshall enjoys learning about the latest 
+                      computer hardware, participating in cybersecurity competitions, and playing
+                      League with his friends. A fun fact about Marshall is that he spent Summer 2023
+                      studying abroad in Vienna Austria!
+                  </p>
+              </div>
+          </div>
+      </div>
   </div>
-  <!-- End of MDB Card -->
-
 </div>
 
 
