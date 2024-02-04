@@ -18,6 +18,7 @@ let mouseOffset = new THREE.Vector2();
 //constants
 const earthRotateSpeed = 0.0005;
 const ISSDegreesPerSecond = 1.63888888889;
+const MOON_SPEED = 5;
 const shouldGetCountry = false;
 
 init();
@@ -41,7 +42,7 @@ function init() {
     if (changeViewBtn) {
       changeViewBtn.addEventListener('click', function() {
         console.log('The view has been changed!');
-        currentView = (currentView + 1) % 2
+        currentView = (currentView + 1) % 3;
         // Add more functionality here to change the view
       });
     } else {
@@ -52,17 +53,23 @@ function init() {
     // load earth texture
     const texLoader = new THREE.TextureLoader();
     const texture = texLoader.load(static_url + 'textures/earth.jpg');
+    const moonTexture = texLoader.load(static_url + 'textures/moon.jpg')
     const phongMaterial = new THREE.MeshPhongMaterial({ 
         map: texture, // Diffuse texture map
         specular: 0x222222, // Specular highlights, adjust as needed
         shininess: 15 // Shininess of the material, adjust as needed
     });
+    const moonPhongMaterial = new THREE.MeshPhongMaterial({
+        map: moonTexture,
+        specular: 0x222222,
+        shininess: 15
+    })
     
 
     earth = new THREE.Mesh( geometry, phongMaterial );
     scene.add( earth );
 
-    moon = new THREE.Mesh( moonGeometry, phongMaterial );
+    moon = new THREE.Mesh( moonGeometry, moonPhongMaterial );
     scene.add( moon );
 
     const directionalLight = new THREE.DirectionalLight( 0xf0f0f0, 1.3 );
@@ -155,9 +162,24 @@ function animate() {
 
 
 
+
+
+
+
         //make moon orbit
-        moon.scale.set(0.25, 0.25, 0.25);
-        moon.position.
+        moon.scale.set(0.15, 0.15, 0.15);
+        let lat = clock.getElapsedTime() * MOON_SPEED;
+        let lon = clock.getElapsedTime() * MOON_SPEED / 10;
+    
+        let goal = new THREE.Vector3();
+        const toRad = Math.PI / 180;
+        const rho = 250; //moon rho needs to be bigger
+        goal.x = rho * Math.sin(lat * toRad) * Math.cos(lon * toRad); 
+        goal.z = rho * Math.sin(lat * toRad) * Math.sin(lon * toRad);
+        goal.y = rho * Math.cos(lat * toRad);
+        moon.position.copy(goal);
+        moon.rotation.x += .01
+
 
 
         //iss.position.set(0,50,0);
@@ -167,15 +189,18 @@ function animate() {
         iss.position.copy(iss.position.lerp(ISSGoalPosition, .005));
 
         //update cam
+        camera.lookAt(earth.position);
         if (currentView == 0) {
             let directionToEarth = new THREE.Vector3().subVectors(iss.position, earth.position).normalize().multiplyScalar(60);
             camGoalPosition.copy(iss.position);
             camGoalPosition.add(directionToEarth);
         } else if (currentView == 1) {
-            camGoalPosition.set(-200, 0, 0)
+            camGoalPosition.set(-200, 0, 0);
+        } else if (currentView == 2) {
+            camera.lookAt(moon.position);
+            camGoalPosition.set(-600, 0, 0);
         }
-        camera.position.copy(camera.position.lerp(camGoalPosition, .01))
-        camera.lookAt(earth.position)
+        camera.position.copy(camera.position.lerp(camGoalPosition, .01));
 
     }
 
@@ -197,7 +222,7 @@ async function updateISSPosition() {
 
     let goal = new THREE.Vector3();
     const toRad = Math.PI / 180;
-    const rho = 100;
+    const rho = 150;
     goal.x = rho * Math.sin(lat * toRad) * Math.cos(lon * toRad); 
     goal.z = rho * Math.sin(lat * toRad) * Math.sin(lon * toRad);
     goal.y = rho * Math.cos(lat * toRad);
