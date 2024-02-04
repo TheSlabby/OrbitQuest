@@ -16,6 +16,7 @@ let mouseOffset = new THREE.Vector2();
 //constants
 const earthRotateSpeed = 0.0005;
 const ISSDegreesPerSecond = 1.63888888889;
+const shouldGetCountry = false;
 
 init();
 animate();
@@ -109,7 +110,9 @@ function init() {
     window.addEventListener( 'resize', onWindowResize );
 
     //update ISS position periodically
-    setInterval(updateISSPosition, 10000);
+    setInterval(updateISSPosition, 30000);
+    updateISSPosition();
+    
 
 }
 
@@ -158,6 +161,9 @@ async function updateISSPosition() {
     const data = await response.json(); // Extract JSON from the HTTP response
     let lat = data.iss_position.latitude;
     let lon = data.iss_position.longitude;
+    //offset
+    lat = 0;
+    lon = 0;
     console.log(lat);
     console.log(lon);
 
@@ -173,6 +179,16 @@ async function updateISSPosition() {
     addMarker(goal);
 
 
+    //now attempt to identify country
+    if (shouldGetCountry) {
+        fetch('/getCountry/')
+        .then(response => response.json())
+        .then(data => {
+            //print out country
+            console.log(data.address.country)
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    }
 
 
     ISSGoalPosition = goal;
