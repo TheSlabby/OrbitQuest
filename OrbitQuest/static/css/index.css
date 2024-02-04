@@ -1,42 +1,57 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #333;
-    overflow: hidden;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .topnav a {
-    float: left;
-    color: #f2f2f2a6;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #4e4b4b;
-    color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: #0609c58e;
-    color: #f2f2f2a6;
-  }
+  background-color: #333;
+  overflow: hidden;
+}
 
-  body {
-    background-color: rgb(19, 19, 19);
-  }
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  opacity: 0.75;
+  color: #f2f2f2a6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: Calibri, sans-serif
+}
 
-  #three-container {
-    width: 99%;
-    height: 100%; /* Adjust 50px to match your navbar's height */
-    position: relative; /* Or 'absolute', depending on your layout needs */
-    overflow: hidden;
-  }
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #4e4b4b;
+  color: black;
+}
 
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #0609c58e;
+  color: #f2f2f2a6;
+}
+
+h1 {
+  text-align: center;
+  font-family: Calibri, sans-serif;
+  color: #f2f2f2a6;
+  font-size: 20;
+}
+
+body {
+  background-color: rgb(19, 19, 19);
+}
+
+para {
+  text-indent: 25px;
+  color: #f2f2f2a6;
+  font-size: 12px;
+  font-family: Calibri, sans-serif;
+}
+
+imgTitle {
+  color: #f2f2f2a6;
+  text-align: center;
+  font-size: 17px;
+  font-family: Calibri, sans-serif
+}
 
 ourFooter {
   width: 100%;
@@ -47,11 +62,11 @@ ourFooter {
   font-size: 10;
   font-family: Calibri, sans-serif;
   background-color: #333;
-}
+  }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
