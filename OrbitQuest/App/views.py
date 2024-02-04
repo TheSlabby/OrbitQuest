@@ -44,11 +44,7 @@ def get_apod(request):
 
     response = requests.get(base_url, params=params)
 
-    if response.status_code == 200:
-        return JsonResponse(response.json(), safe=False)
-    else:
-        print(f"Error: {response.status_code}")
-        return None
+    return JsonResponse(response.json(), safe=False)
 
 
 
