@@ -113,6 +113,22 @@ function init() {
 
 }
 
+
+//DOCUMENT EVENTS
+document.addEventListener('DOMContentLoaded', (event) => {
+    console.log("LOADED DOCUMENT");
+    const changeViewBtn = document.getElementById('change-view-btn');
+    if (changeViewBtn) {
+      changeViewBtn.addEventListener('click', function() {
+        console.log('The view has been changed!');
+        // Add more functionality here to change the view
+      });
+    } else {
+      console.log('Change view button not found');
+    }
+  });
+
+
 function onWindowResize() {
 
     camera.aspect = window.innerWidth / window.innerHeight;
