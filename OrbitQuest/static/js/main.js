@@ -19,7 +19,7 @@ let mouseOffset = new THREE.Vector2();
 const earthRotateSpeed = 0.0005;
 const ISSDegreesPerSecond = 1.63888888889;
 const MOON_SPEED = 5;
-const shouldGetCountry = false;
+const shouldGetCountry = true;
 
 init();
 animate();
