@@ -4,7 +4,7 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
 
 //variables
 let camera, scene, renderer, clock;
-let earth, iss;
+let earth, iss, moon;
 let currentView = 0;
 //iss velocity calculation
 let lastISSPosition = new THREE.Vector2();
@@ -32,6 +32,8 @@ function init() {
     scene = new THREE.Scene();
 
     const geometry = new THREE.SphereGeometry( 300, 200, 200 );
+    const moonGeometry = new THREE.SphereGeometry(100, 50, 50);
+    
     document.addEventListener('mousemove', onDocumentMouseMove, false);
 
     //CHANGE VIEW
@@ -53,12 +55,15 @@ function init() {
     const phongMaterial = new THREE.MeshPhongMaterial({ 
         map: texture, // Diffuse texture map
         specular: 0x222222, // Specular highlights, adjust as needed
-        shininess: 10 // Shininess of the material, adjust as needed
+        shininess: 15 // Shininess of the material, adjust as needed
     });
     
 
     earth = new THREE.Mesh( geometry, phongMaterial );
     scene.add( earth );
+
+    moon = new THREE.Mesh( moonGeometry, phongMaterial );
+    scene.add( moon );
 
     const directionalLight = new THREE.DirectionalLight( 0xf0f0f0, 1.3 );
     directionalLight.position.set(-500,500,500);
@@ -144,12 +149,15 @@ function animate() {
 
     requestAnimationFrame( animate );
 
-    if (earth && iss) {
+    if (earth && iss && moon) {
         earth.scale.set(0.25,0.25,0.25);
         iss.scale.set(.3,.3,.3)
 
-        //earth.rotation.x += earthRotateSpeed;
-    
+
+
+        //make moon orbit
+        moon.scale.set(0.25, 0.25, 0.25);
+        moon.position.
 
 
         //iss.position.set(0,50,0);

@@ -64,3 +64,6 @@ def tracker(request):
 
 def about(request):
     return render(request, 'About.html')
+
+def home(request):
+    return render(request, 'home.html')

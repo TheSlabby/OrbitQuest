@@ -12,12 +12,16 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
 </head>
 <body>
-    <div class="topnav">
-      <a class="active" href="/">Home</a>
+  <div class="topnav">
+    <div class="nav-links">
+      <a class="active" href="/"><img src="{% static 'textures/logo.png' %}" alt="Logo" style="height: 50px;"></a>
       <a href="/tracker">ISS Tracker</a>
       <a href="/apod">Daily Photo</a>
       <a href="/about">About</a>
     </div>
+    <div class="nav-logo">
+    </div>
+  </div>
     {% block content %}{% endblock %}
 
     <!-- FOOTER -->

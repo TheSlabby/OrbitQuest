@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  body { 
+    margin: 0; 
+    background-image: url("{% static 'textures/skybox.avif' %}"); 
+    background-size: cover; 
+    background-position: center;
+  }
+  .hero-section {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+  }
+  .hero-section h1 {
+    font-size: 4rem;
+    font-weight: bold;
+  }
+  .hero-section p {
+    font-size: 1.5rem;
+    margin-top: 20px;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="hero-section">
+  <div>
+    <h1>Welcome to OrbitQuest™</h1>
+    <p>Exploring the universe with you.</p>
+  </div>
+</div>
+
+<div class="container my-5">
+    <div class="row">
+      <!-- Section One -->
+      <div class="col-md-4 mb-4">
+        <div class="card elegant-color-dark">
+          <!-- Card content -->
+          <div class="card-body text-white">
+            <h2 class="card-title">Section One</h2>
+            <p>Some quick example text to build on the section title and make up the bulk of the content.</p>
+            <a href="#" class="btn btn-outline-info">View details »</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Section Two -->
+      <div class="col-md-4 mb-4">
+        <div class="card elegant-color-dark">
+          <!-- Card content -->
+          <div class="card-body text-white">
+            <h2 class="card-title">Section Two</h2>
+            <p>Another exciting aspect of our project. Learn more about what we do and why we do it.</p>
+            <a href="#" class="btn btn-outline-info">View details »</a>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Section Three -->
+      <div class="col-md-4 mb-4">
+        <div class="card elegant-color-dark">
+          <!-- Card content -->
+          <div class="card-body text-white">
+            <h2 class="card-title">Section Three</h2>
+            <p>Join us in our journey. Discover how you can contribute to our mission and make a difference.</p>
+            <a href="#" class="btn btn-outline-info">View details »</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
