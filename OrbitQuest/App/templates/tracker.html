@@ -4,6 +4,11 @@
 		
 {% block content %}
 
+
+<script type="module" src="{% static 'js/main.js' %}"></script>
+<div id="three-container"></div>
+
+
 <div class="card shadow-1-strong"> <!-- Add a shadow for depth -->
 	<div class="card-body">
 	  <h5 class="card-title">ISS Tracker</h5>
@@ -20,6 +25,6 @@
 	</div>
 </div>
 
-<script type="module" src="{% static 'js/main.js' %}"></script>
-<div id="three-container"></div>
+
+
 {% endblock %}

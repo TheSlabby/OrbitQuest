@@ -1,0 +1,68 @@
+
+
+
+
+
+{% extends "base.html" %}
+{% load static %}
+
+		
+{% block content %}
+
+<img id="APOD"
+    class="center"
+    src="https://apod.nasa.gov/apod/image/2402/a14pan9335-43emj.jpg"
+    alt="Picture of the Day" style="width:100%;height:100%;">
+
+
+    <script>
+        let imageURL, imageTitle, imageDescription
+    
+        async function getApod() {
+            const baseUrl = "/getApod/";
+            
+            // If you have an API key, include it in the request
+            
+            const response = await fetch(baseUrl);
+            
+            if (response.ok) {
+                const data = await response.json();
+                return data;
+            } else {
+                console.error(`Error: ${response.status}`);
+                return null;
+            }
+        }
+    
+        // Replace 'YOUR_API_KEY' with your actual NASA API key
+        getApod()
+            .then(apodData => {
+                if (apodData) {
+                    document.getElementById('APOD').imageURL = apodData.url
+                    document.getElementById('apod-title').textContent = apodData.title
+                    document.getElementById('apod-description').textContent = apodData.date
+                    document.getElementById('apod-explanation').textContent = apodData.explanation
+                    console.log("Title:", apodData.title);
+                    console.log("Date:", apodData.date);
+                    console.log("Explanation:", apodData.explanation);
+                    console.log("HD URL:", apodData.hdurl);
+                    console.log("URL:", apodData.url);
+                } else {
+                    console.log("Failed to retrieve APOD data.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    </script>
+
+
+<div class="card mb-3 shadow-1-strong">
+    <div class="card-body">
+      <h5 class="card-title" id="apod-title">Loading</h5> <!-- Placeholder Title -->
+      <p class="card-text" id="apod-description">Loading.</p> <!-- Placeholder Description -->
+      <p class="card-text"><small class="text-muted" id="apod-explanation">Loading.</small></p> <!-- Placeholder Explanation -->
+    </div>
+  </div>
+
+
+
+{% endblock %}
