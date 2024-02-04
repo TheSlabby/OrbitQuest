@@ -60,3 +60,7 @@ def tracker(request):
     
     # Render the template
     return render(request, 'tracker.html', context)
+
+
+def about(request):
+    return render(request, 'About.html')

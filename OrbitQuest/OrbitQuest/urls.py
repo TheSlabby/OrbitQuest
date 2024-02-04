@@ -24,5 +24,6 @@ urlpatterns = [
     path('getCountry/', views.get_country, name='country'),
     path('getApod/', views.get_apod, name='getApod'),
     path('apod/', views.apod, name='apod'),
-    path('tracker/', views.tracker, name='tracker')
+    path('tracker/', views.tracker, name='tracker'),
+    path('about/', views.about, name='about'),
 ]
