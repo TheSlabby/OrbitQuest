@@ -1,0 +1,21 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>OrbitQuest: ISS Tracker</title>
+		<style>
+			body { margin: 0; background-image: url("{% static 'textures/skybox.avif' %}");}
+		</style>
+	</head>
+	<body>
+		<script type="module" src="{% static 'js/main.js' %}"></script>
+		<script>
+			var static_url = "{% get_static_prefix %}";
+			var media_url = "{% get_media_prefix %}";
+		</script>		
+	</body>
+</html>

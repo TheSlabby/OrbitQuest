@@ -9,6 +9,7 @@ let earth, iss;
 let lastISSPosition = new THREE.Vector2();
 let ISSVelocity = new THREE.Vector2();
 let ISSGoalPosition = new THREE.Vector3();
+let mouseOffset = new THREE.Vector2();
 
 
 
@@ -27,7 +28,8 @@ function init() {
 
     scene = new THREE.Scene();
 
-    const geometry = new THREE.SphereGeometry( 200, 200, 200 );
+    const geometry = new THREE.SphereGeometry( 300, 200, 200 );
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
 
 
     // load earth texture
@@ -58,7 +60,7 @@ function init() {
     // Load a glTF resource
     objLoader.load(
         // resource URL
-        'models/ISS.glb',
+        'static/models/ISS.glb',
         // called when the resource is loaded
         function ( gltf ) {
 
@@ -139,7 +141,7 @@ function animate() {
         iss.position.copy(iss.position.lerp(ISSGoalPosition, .005));
 
         //update cam
-        let directionToEarth = new THREE.Vector3().subVectors(iss.position, earth.position).normalize().multiplyScalar(30);
+        let directionToEarth = new THREE.Vector3().subVectors(iss.position, earth.position).normalize().multiplyScalar(60);
         camera.position.copy(iss.position);
         camera.position.add(directionToEarth);
         camera.lookAt(earth.position)
@@ -161,14 +163,42 @@ async function updateISSPosition() {
 
     let goal = new THREE.Vector3();
     const toRad = Math.PI / 180;
-    const rho = 120;
+    const rho = 100;
     goal.x = rho * Math.sin(lat * toRad) * Math.cos(lon * toRad); 
     goal.z = rho * Math.sin(lat * toRad) * Math.sin(lon * toRad);
     goal.y = rho * Math.cos(lat * toRad);
 
     console.log(goal);
 
+    addMarker(goal);
+
+
 
 
     ISSGoalPosition = goal;
+}
+
+//add red marker to show previous location of ISS
+function addMarker(goal) {
+    const geometry = new THREE.SphereGeometry(0.5, 32, 32); // Adjusted segment count for smoother sphere
+    const material = new THREE.MeshBasicMaterial({
+        color: 0xFF0505,
+        transparent: true, // Enable transparency
+        opacity: 0.5 // Set the opacity to 50% transparent
+    });
+    const sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+    sphere.position.copy(goal);
+    
+
+}
+
+function onDocumentMouseMove( event ) {
+
+    event.preventDefault();
+
+    mouseOffset = new THREE.Vector2(
+        ( event.clientX / renderer.domElement.width ) * 2 - 1,
+        - ( event.clientY / renderer.domElement.height ) * 2 + 1,
+    )
 }
