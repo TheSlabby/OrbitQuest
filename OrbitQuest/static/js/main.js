@@ -168,8 +168,8 @@ function animate() {
 
         //make moon orbit
         moon.scale.set(0.15, 0.15, 0.15);
-        let lat = clock.getElapsedTime() * MOON_SPEED;
-        let lon = clock.getElapsedTime() * MOON_SPEED / 10;
+        let lat = 90;
+        let lon = clock.getElapsedTime() * MOON_SPEED;
     
         let goal = new THREE.Vector3();
         const toRad = Math.PI / 180;
@@ -195,7 +195,13 @@ function animate() {
             camGoalPosition.copy(iss.position);
             camGoalPosition.add(directionToEarth);
         } else if (currentView == 1) {
-            camGoalPosition.set(-200, 0, 0);
+            const toRad = Math.PI / 180;
+            const rho = 500;
+            let lon = (mouseOffset.x + .5) * 360;
+            let lat = (mouseOffset.y) * 180;
+            camGoalPosition.x = rho * Math.sin(lat * toRad) * Math.cos(lon * toRad); 
+            camGoalPosition.z = rho * Math.sin(lat * toRad) * Math.sin(lon * toRad);
+            camGoalPosition.y = rho * Math.cos(lat * toRad);
         } else if (currentView == 2) {
             camera.lookAt(moon.position);
             camGoalPosition.set(-600, 0, 0);
