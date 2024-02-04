@@ -38,7 +38,7 @@
         getApod()
             .then(apodData => {
                 if (apodData) {
-                    document.getElementById('APOD').imageURL = apodData.url
+                    document.getElementById('APOD').src = apodData.hdurl
                     document.getElementById('apod-title').textContent = apodData.title
                     document.getElementById('apod-description').textContent = apodData.date
                     document.getElementById('apod-explanation').textContent = apodData.explanation
