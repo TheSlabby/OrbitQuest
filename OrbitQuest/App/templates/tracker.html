@@ -4,7 +4,11 @@
 		
 {% block head %}
 <style>
-	body { margin: 0; background-image: url("{% static 'textures/skybox.avif' %}"); }
+	body {
+  margin: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)), url("{% static 'textures/skybox.avif' %}");
+  background-size: cover; /* Cover the whole body with the image */
+}
 </style>
 {% endblock %}
 
