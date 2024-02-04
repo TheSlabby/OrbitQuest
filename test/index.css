@@ -12,6 +12,7 @@
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+    font-family: Calibri, sans-serif
   }
   
   /* Change the color of links on hover */
@@ -29,3 +30,15 @@
   body {
     background-color: rgb(19, 19, 19);
   }
+
+  footer {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    color: #f2f2f2a6;
+    text-align: center;
+    font-size: 10;
+    font-family: Calibri, sans-serif;
+    background-color: #333;
+    }
