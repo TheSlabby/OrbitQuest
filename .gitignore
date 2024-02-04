@@ -12,6 +12,9 @@ media
 # key file
 .key
 
+# utils py
+utils.py
+
 # If you are using PyCharm # 
 # User-specific stuff
 .idea/**/workspace.xml

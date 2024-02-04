@@ -26,4 +26,5 @@ urlpatterns = [
     path('apod/', views.apod, name='apod'),
     path('tracker/', views.tracker, name='tracker'),
     path('about/', views.about, name='about'),
+    path('iss-now/', views.iss_now, name='iss_now'),
 ]

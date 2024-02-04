@@ -210,7 +210,7 @@ function animate() {
 }
 
 async function updateISSPosition() {
-    const response = await fetch('http://api.open-notify.org/iss-now.json');
+    const response = await fetch('/iss-now');
     const data = await response.json(); // Extract JSON from the HTTP response
     let lat = data.iss_position.latitude;
     let lon = data.iss_position.longitude;

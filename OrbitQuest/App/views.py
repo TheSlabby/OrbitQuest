@@ -46,6 +46,11 @@ def get_apod(request):
 
     return JsonResponse(response.json(), safe=False)
 
+def iss_now(request):
+    base_url = 'http://api.open-notify.org/iss-now.json'
+    response = requests.get(base_url)
+    return JsonResponse(response.json(), safe=False)
+
 
 
 
