@@ -5,10 +5,12 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.133.0/examples/jsm/l
 //variables
 let camera, scene, renderer, clock;
 let earth, iss;
+let currentView = 0;
 //iss velocity calculation
 let lastISSPosition = new THREE.Vector2();
 let ISSVelocity = new THREE.Vector2();
 let ISSGoalPosition = new THREE.Vector3();
+let camGoalPosition = new THREE.Vector3();
 let mouseOffset = new THREE.Vector2();
 
 
@@ -25,12 +27,24 @@ function init() {
     clock = new THREE.Clock();
     clock.start();
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.z = 250;
+    camera.position.z = 0;
 
     scene = new THREE.Scene();
 
     const geometry = new THREE.SphereGeometry( 300, 200, 200 );
     document.addEventListener('mousemove', onDocumentMouseMove, false);
+
+    //CHANGE VIEW
+    const changeViewBtn = document.getElementById('change-view-btn');
+    if (changeViewBtn) {
+      changeViewBtn.addEventListener('click', function() {
+        console.log('The view has been changed!');
+        currentView = (currentView + 1) % 2
+        // Add more functionality here to change the view
+      });
+    } else {
+      console.log('Change view button not found');
+    }
 
 
     // load earth texture
@@ -114,9 +128,8 @@ function init() {
     //update ISS position periodically
     setInterval(updateISSPosition, 30000);
     updateISSPosition();
-    
-
 }
+
 
 function onWindowResize() {
 
@@ -146,9 +159,14 @@ function animate() {
         iss.position.copy(iss.position.lerp(ISSGoalPosition, .005));
 
         //update cam
-        let directionToEarth = new THREE.Vector3().subVectors(iss.position, earth.position).normalize().multiplyScalar(60);
-        camera.position.copy(iss.position);
-        camera.position.add(directionToEarth);
+        if (currentView == 0) {
+            let directionToEarth = new THREE.Vector3().subVectors(iss.position, earth.position).normalize().multiplyScalar(60);
+            camGoalPosition.copy(iss.position);
+            camGoalPosition.add(directionToEarth);
+        } else if (currentView == 1) {
+            camGoalPosition.set(-200, 0, 0)
+        }
+        camera.position.copy(camera.position.lerp(camGoalPosition, .01))
         camera.lookAt(earth.position)
 
     }
