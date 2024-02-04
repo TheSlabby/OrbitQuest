@@ -21,6 +21,7 @@ from App import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.my_view, name='home'),
-    path('getCountry/', views.get_country, name='country')
+    path('getCountry/', views.get_country, name='country'),
+    path('getApod/', views.get_apod, name='getApod'),
 
 ]

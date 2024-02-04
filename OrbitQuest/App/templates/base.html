@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}OrbitQuest: ISS Tracker{% endblock %}</title>
+    {% block head %}{% endblock %}
+    <!-- MDB CSS -->
+    <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+    <style>
+        body { margin: 0; background-image: url("{% static 'textures/skybox.avif' %}"); }
+    </style>
+</head>
+<body>
+    <div class="topnav">
+      <a class="active" href="#home">Home</a>
+      <a href="#Tracker">ISS Tracker</a>
+      <a href="#APOD">Daily Photo</a>
+      <a href="#about">About</a>
+    </div>
+    {% block content %}{% endblock %}
+    <!-- MDB JS -->
+    <script src="{% static 'js/mdb.es.min.js' %}"></script>
+    <script>
+        var static_url = "{% get_static_prefix %}";
+        var media_url = "{% get_media_prefix %}";
+    </script>
+</body>
+</html>

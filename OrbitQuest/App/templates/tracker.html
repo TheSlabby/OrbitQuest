@@ -1,21 +1,25 @@
+{% extends "base.html" %}
 {% load static %}
 
+		
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
+<div class="card shadow-1-strong"> <!-- Add a shadow for depth -->
+	<div class="card-body">
+	  <h5 class="card-title">ISS Tracker</h5>
+	  <p class="card-text">Track the current position of the International Space Station as it orbits Earth. Below, you can see the country the ISS is currently over.</p>
+	  
+	  <!-- Country Display Field -->
+	  <div id="iss-country-info" class="mt-4"> <!-- Added margin-top for spacing -->
+	    <h6 class="card-subtitle text-muted">Current Country:</h6>
+	    <p id="iss-current-country" class="font-weight-bold text-primary">Loading country info...</p>
+	  </div>
 
-	<head>
-		<meta charset="utf-8">
-		<title>OrbitQuest: ISS Tracker</title>
-		<style>
-			body { margin: 0; background-image: url("{% static 'textures/skybox.avif' %}");}
-		</style>
-	</head>
-	<body>
-		<script type="module" src="{% static 'js/main.js' %}"></script>
-		<script>
-			var static_url = "{% get_static_prefix %}";
-			var media_url = "{% get_media_prefix %}";
-		</script>		
-	</body>
-</html>
+	  <!-- Optionally, you can add a refresh or update button if the country info will be dynamically updated -->
+	  <button type="button" class="btn btn-primary btn-sm" id="update-country-btn">Update Position (NO-OP)</button>
+	</div>
+</div>
+
+<script type="module" src="{% static 'js/main.js' %}"></script>
+<div id="three-container"></div>
+{% endblock %}
