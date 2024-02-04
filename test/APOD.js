@@ -2,25 +2,9 @@ let imageURL, imageTitle, imageDescription
 const fetch = require('node-fetch'); // Make sure to install 'node-fetch' using npm install node-fetch
 
 function init {
-        const response = await fetch('http://api.open-notify.org/iss-now.json');
+        const response = await fetch('https://api.nasa.gov/planetary/apod');
         const data = await response.json(); // Extract JSON from the HTTP response
-        let lat = data.iss_position.latitude;
-        let lon = data.iss_position.longitude;
-        console.log(lat);
-        console.log(lon);
-    
-        let goal = new THREE.Vector3();
-        const toRad = Math.PI / 180;
-        const rho = 100;
-        goal.x = rho * Math.sin(lat * toRad) * Math.cos(lon * toRad); 
-        goal.z = rho * Math.sin(lat * toRad) * Math.sin(lon * toRad);
-        goal.y = rho * Math.cos(lat * toRad);
-    
-        console.log(goal);
-    
-        addMarker(goal);
-    
-    
+        
     
     
 }
